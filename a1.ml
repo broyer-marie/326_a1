@@ -1,8 +1,8 @@
 (*** COS 326 Problem Set 1 ***)
-(*** YOUR NAME HERE ***)
-(*** YOUR LOGIN HERE ***)
+(*** Brianna Royer ***)
+(*** broyer ***)
 
-let undefined : unit -> 'a = fun () -> failwith "undefined"
+let undefined : unit -> 'a = fun () -> failwith "undefined";;
 
 (* 1. Please define these variables with the appropriate values.
  * Be sure that these statements all type-check after editing them.
@@ -11,33 +11,34 @@ let undefined : unit -> 'a = fun () -> failwith "undefined"
  * for example, Ctrl+c and then Ctrl+e in Emacs with Tuareg mode *)
 
 (* 1.a. Create a string with your first name *)
-let name : string = undefined ()
+let name : string = "Brianna"
 
 (* 1.b. Use a string operator on the string from 1.a. to create
  * a string that contains both your first and last names. *)
-let name : string = undefined ()
+let name : string = name ^ " Royer"
 
 (* 1.c. Create a string containing your email address *)
-let email : string = undefined ()
+let email : string = "broyer@princeton.edu"
 
 (* 1.d. Replace (Other "...") in class_year with the appropriate item below *)
 (* ie: replace (Other "...") with Sophomore or Junior for example *)
-type year = Freshman | Sophomore | Junior | Senior | Other of string
+type year = (*Freshman | Sophomore | Junior | Senior | *) Other of string
 
-let class_year : year = Other "I haven't filled it in yet"
+let class_year : year = Other "Graduate"
 
 (* 1.e. Replace the .... with what you're excited about in this course *)
-let exciting : string = "I'm excited about ....!"
+let exciting : string = "I'm excited about practicing my Linux scripting and learning about this different programming framework from OoP!"
 
 let sprint = Printf.sprintf
 
 let return_survey () : string =
   let string_year =
     (match class_year with
-       | Freshman -> "Freshman"
+      (*| Freshman -> "Freshman"
        | Sophomore -> "Sophomore"
        | Junior -> "Junior"
        | Senior -> "Senior"
+       | Graduate -> "Graduate" *)
        | Other s -> "Other: " ^ s
     ) in
     ((sprint "Name: %s\n" name) ^
@@ -54,26 +55,19 @@ let return_survey () : string =
  * in the ???s to make them type check. *)
 
 (* Problem 2a *)
-(*
-let prob2a : ???  = let greet y = "Hello " ^ y in greet "World!"
-*)
+
+let prob2a : string = let greet y = "Hello " ^ y in greet "World!"
 
 (* Problem 2b *)
-(*
-let prob2b : ??? = float_of_int( int_of_float(2.2 +. 7.7))
-*)
+let prob2b : float = float_of_int( int_of_float(2.2 +. 7.7))
 
-(*>* Problem 2c *>*)
-(*
-let rec prob2c (x : ???) : ??? =
+(*>* Problem 2c TODO: WHAT??? *>*)
+let rec prob2c (x : char) : char =
   prob2c ( if true then prob2c x else 'h')
-*)
 
 (*>* Problem 2d *>*)
-(*
-let rec prob2d (y:???) (z:???) : ??? =
+let rec prob2d (y:bool) (z:bool) : bool =
    prob2d (prob2d z y) (not y)
-*)
 
 (* Explain why each of 3a, 3b, 3c will not compile (use the strings
  * exp3{a,b,c} for your answers) and change the code in some small way
@@ -81,38 +75,36 @@ let rec prob2d (y:???) (z:???) : ??? =
    the top-level type associated with the expression. *)
 
 (*>* Problem 3a *>*)
-let exp3a : string = ""
-(*
+let exp3a : string = "This will not compile as-is because the compared x y are of type float and type int, respectively."
+
 let prob3a : bool =
   let compare x y = x < y in
-  compare 3.9 4
-*)
+  (*Altered 3.9 to be 3, of type int*)
+compare 3 4
+
 
 (*>* Problem 3b *>*)
-let exp3b : string = ""
-(*
+let exp3b : string = "Functions bind more strongly than mathematical operators, so argument passing to else aux was partial and incorrect. Parentheses added."
+
 let prob3b : int =
   let fib n =
-    let rec aux n y x =
-      if n <= 0 then x
-      else aux n-1 x+y y
+    let rec aux a y x =
+      if a <= 0 then x
+      else aux (a-1) (x+y) y
     in
     aux n 1 0
   in
   fib 10
-*)
-
 
 (*>* Problem 3c *>*)
-let exp3c : string = ""
-(*
+let exp3c : string = "This was missing the rec keyword."
+
 let prob3c : int =
-  let sumTo (n:int) : int =
+  let rec sumTo (n:int) : int =
     if n <= 0 then 0
     else n + sumTo (n-1)
   in
   sumTo 10
-*)
 
 (*>* Problem 4 *>*)
 (* 4a: Fill in the ??? with an expression that uses x and y and has
@@ -120,37 +112,35 @@ let prob3c : int =
  *
 *)
 
-(*
+
 let prob4a =
   let u = 32.0 in
   let v = 28.0 in
   let square w = w *. w in
-  let boff (x) (y) = ??? in
+  let boff (x) (y) = y -. x in
   let d = sqrt (boff u v) in
   int_of_float d
-*)
 
 (*
  * Also:  What warning message do you get if your ??? expression does not
  * use the function "square"?
  *)
-let warn4a : string = ""
+let warn4a : string = "[unused-var]: unused variable square"
 
 (* 4b: Replace each ?? with the type of the corresponding expression,
  * and write a function f that has the correct type signature. Explain
  * in exp4b a problem that remains with the function prob4b *)
 
-(*
-let f (a:??) (b:??) : ?? =
+
+let f (a:int) (b:int) : float = float_of_int (a*b)
 
 
 
-let rec prob4b (x:??) (y:??) : ?? =
+let rec prob4b (x:float) (y:int) : float =
   prob4b (f y 4) (int_of_float x)
 
-*)
 
-let exp4b : string = ""
+let exp4b : string = "This recursive function is an infinite loop. It doesn't seem to resolve type."
 
 (* 4c:
  * Given the types that you have been introduced to so far in this
@@ -160,12 +150,14 @@ let exp4b : string = ""
  * Either give correct types or explain why it is impossible in the
  * string exp4c *)
 
-(*
-let rec forever (x:??) : ?? =
+ (*
+ let rec forever (x:int) : int =
   forever forever
+  *)
 
-let exp4c : string = ""
-*)
+let exp4c : string = "This is infinitely passing a function and seeking through functions for the result type. It evaluates forever and cannot be solved."
+
+
 
 (*>* Problem 5 *>*)
 
@@ -191,16 +183,23 @@ let _ = few_divisors 18 7 (* true -- 18 has only 1, 18, 2, 3, 6, and 9 *)
  * if n <= 0 or m < 0
  *)
 
+ let few_divisors (n:int) (m:int) : bool = 
+  if n <= 0 then bad_divisors n m
+  else if m < 0 then bad_divisors n m
+  else
+    let rec aux (num:int) (divisor:int) (count:int) : int = 
+    if num = divisor then count
+    else if (num mod divisor) = 0 then aux num (divisor + 1) (count + 1)
+    else aux num (divisor+1) (count)
+  in ((aux n 1 1) < m)
+
 (* After writing few_divisors above, uncomment the following lines to test your
  * code.  (Note: your code is not necessarily completely correct just because
  * it passes these 3 tests.)  *)
-(*
 
 let _ = assert (few_divisors 17 3)
 let _ = assert (not (few_divisors 4 3))
 let _ = assert (few_divisors 4 4)
-
-*)
 
 (* Problem 6 - Approximating Pi *)
 
@@ -228,6 +227,14 @@ let bad_pi (n:int) = raise (BadPi n)
 *)
 
 (* sin_pi should call the function bad_pi i if its argument i is less than 0 *)
+
+  let sin_pi (n:int) : float =
+    if n < 0 then bad_pi n
+    else
+      let rec approx (n:float) : float =
+      if n = 0.0 then (float_of_int 3)
+      else (approx (n -. 1.0) +. sin(approx (n -. 1.0))) in
+    approx(float_of_int n)
 
 
 (* Problem 7 - Collatz Sequence *)
@@ -280,3 +287,4 @@ let bad_pi (n:int) = raise (BadPi n)
    correct results on inputs that lead to this kind of overflow.
 
 *)
+
